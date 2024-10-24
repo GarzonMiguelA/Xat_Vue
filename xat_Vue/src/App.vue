@@ -1,12 +1,27 @@
-<script setup>
-import mensaje from './components/mensaje.vue'
-
-</script>
-
 <template>
-  <h1>Hello</h1>
+  <div>
+    <h1>Xat entre usuarios</h1>
+    <ul>
+      <li v-for="mensaje in mensajes" :key="mensaje.id">
+        {{ mensaje.mensajeUser }}: {{ mensaje.text }}
+      </li>
+    </ul>
+    <mensaje :mensajeUser="'Usuario1'" @enviarMensaje="nuevoMensaje" />
+  </div>
 </template>
 
+
+<script setup>
+  import { ref } from 'vue';
+  import mensaje from './components/mensaje.vue'
+
+  const mensajes = ref([]);
+
+  const nuevoMensaje = (mensaje) => {
+    mensajes.value.push(mensaje)
+  }
+
+</script>
 
 
 <style scoped>
