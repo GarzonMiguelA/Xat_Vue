@@ -1,54 +1,64 @@
 <template>
-  <div>
+  <div class="chat-container">
     <h1>Xat entre usuarios</h1>
-    <ul>
-      <li v-for="mensaje in mensajes" :key="mensaje.id">
-        {{ mensaje.mensajeUser }}: {{ mensaje.text }}
+    <ul class="mensajes-list">
+      <li v-for="mensaje in mensajes" :key="mensaje.id" class="mensaje-item">
+        <strong>{{ mensaje.mensajeUser }}:</strong> {{ mensaje.text }}
       </li>
     </ul>
     <mensaje :mensajeUser="'Usuario1'" @enviarMensaje="nuevoMensaje" />
   </div>
 </template>
 
-
 <script setup>
-  import { ref } from 'vue';
-  import mensaje from './components/mensaje.vue'
+import { ref } from 'vue';
+import mensaje from './components/mensaje.vue'
 
-  const mensajes = ref([]);
+const mensajes = ref([]);
 
-  const nuevoMensaje = (mensaje) => {
-    mensajes.value.push(mensaje)
-  }
-
+const nuevoMensaje = (mensaje) => {
+  mensajes.value.push(mensaje)
+}
 </script>
 
 
+
+
+
+
 <style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+  .chat-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   }
 
-  .logo {
-    margin: 0 2rem 0 0;
+  h1 {
+    text-align: center;
+    color: #333;
   }
 
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+  .mensajes-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    max-height: 300px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background: white;
   }
-}
+
+  .mensaje-item {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .mensaje-item {
+    border-bottom: none;
+    color: black;
+  }
 </style>
